@@ -1,0 +1,14 @@
+{
+  "name": "cloud-notes-s3-presign",
+  "version": "1.0.0",
+  "description": "AWS Lambda helper for generating S3 presigned upload URLs.",
+  "main": "aws-s3-presign-lambda.js",
+  "type": "module",
+  "scripts": {
+    "zip": "powershell Compress-Archive -Path aws-s3-presign-lambda.js,package.json,node_modules -DestinationPath lambda.zip -Force"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.600.0",
+    "@aws-sdk/s3-request-presigner": "^3.600.0"
+  }
+}
