@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cloud Notes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="app-shell">
+    <section id="auth-view" class="auth-view">
+      <div class="brand-panel">
+        <p class="eyebrow">LP-II Cloud Computing</p>
+        <h1>Cloud Notes</h1>
+        <p class="lede">A simple notes app using Firebase Authentication, Firestore real-time storage, Firebase Hosting, and AWS S3 attachments.</p>
+        <div class="feature-strip" aria-label="Cloud features">
+          <span>Firebase Auth</span>
+          <span>Firestore</span>
+          <span>AWS S3</span>
+        </div>
+      </div>
+
+      <form id="auth-form" class="auth-card">
+        <h2 id="auth-title">Sign in</h2>
+        <p id="auth-subtitle">Use your account to manage cloud notes.</p>
+
+        <label for="email">Email</label>
+        <input id="email" type="email" autocomplete="email" placeholder="student@example.com" required>
+
+        <label for="password">Password</label>
+        <input id="password" type="password" autocomplete="current-password" minlength="6" placeholder="Minimum 6 characters" required>
+
+        <button id="auth-submit" class="primary-button" type="submit">Sign in</button>
+        <button id="toggle-auth" class="ghost-button" type="button">Create a new account</button>
+        <p id="auth-message" class="message" role="status"></p>
+      </form>
+    </section>
+
+    <section id="notes-view" class="notes-view hidden">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Personal workspace</p>
+          <h1>My Cloud Notes</h1>
+        </div>
+        <div class="user-actions">
+          <span id="user-email"></span>
+          <button id="logout-button" class="ghost-button" type="button">Logout</button>
+        </div>
+      </header>
+
+      <div class="workspace">
+        <form id="note-form" class="editor-panel">
+          <input type="hidden" id="note-id">
+          <div class="editor-heading">
+            <div>
+              <p class="eyebrow">Note editor</p>
+              <h2 id="editor-title">Create note</h2>
+            </div>
+            <button id="reset-form" class="icon-button" type="button" title="Clear form" aria-label="Clear form">+</button>
+          </div>
+
+          <label for="note-title">Title</label>
+          <input id="note-title" type="text" maxlength="80" placeholder="Project idea, lecture note, reminder..." required>
+
+          <label for="note-content">Content</label>
+          <textarea id="note-content" rows="9" placeholder="Write your note here..." required></textarea>
+
+          <label for="attachment">Attachment</label>
+          <input id="attachment" type="file" accept=".pdf,.png,.jpg,.jpeg,.gif,.doc,.docx,.ppt,.pptx,.xls,.xlsx,.txt">
+          <p id="attachment-hint" class="hint">Optional: PDF, image, document, spreadsheet, or text file.</p>
+
+          <button id="save-note" class="primary-button" type="submit">Save note</button>
+          <p id="note-message" class="message" role="status"></p>
+        </form>
+
+        <section class="notes-panel" aria-labelledby="notes-heading">
+          <div class="notes-panel-header">
+            <div>
+              <p class="eyebrow">Real-time Firestore data</p>
+              <h2 id="notes-heading">Saved notes</h2>
+            </div>
+            <span id="notes-count" class="count-badge">0</span>
+          </div>
+
+          <div id="empty-state" class="empty-state">
+            <h3>No notes yet</h3>
+            <p>Create your first note and it will appear here instantly.</p>
+          </div>
+
+          <div id="notes-list" class="notes-list"></div>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <template id="note-template">
+    <article class="note-card">
+      <div class="note-card-header">
+        <h3></h3>
+        <time></time>
+      </div>
+      <p class="note-body"></p>
+      <a class="attachment-link" target="_blank" rel="noopener">Open attachment</a>
+      <div class="note-actions">
+        <button class="edit-button" type="button">Edit</button>
+        <button class="delete-button" type="button">Delete</button>
+      </div>
+    </article>
+  </template>
+
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+  <script type="module" src="firebase-config.js"></script>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
